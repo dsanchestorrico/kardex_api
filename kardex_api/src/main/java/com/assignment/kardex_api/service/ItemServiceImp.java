@@ -9,7 +9,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.assignment.kardex_api.model.HistoricalItem;
 import com.assignment.kardex_api.model.Item;
+import com.assignment.kardex_api.repository.HistoricalItemRepository;
 import com.assignment.kardex_api.repository.ItemRepository;
 
 @Service
@@ -17,10 +19,12 @@ public class ItemServiceImp implements ItemService {
 
 	@Autowired
 	private final ItemRepository itemRepository;
-
+	@Autowired
+	private final HistoricalItemRepository historicalItemRepository;
 	
-	public ItemServiceImp(ItemRepository itemRepository) {
+	public ItemServiceImp(ItemRepository itemRepository, HistoricalItemRepository historicalItemRepository) {
 		this.itemRepository = itemRepository;
+		this.historicalItemRepository = historicalItemRepository;
 	}
 
 	@Override
@@ -37,6 +41,18 @@ public class ItemServiceImp implements ItemService {
 			item.setPrice(weighPrice);
 			item.setLastDate(new Date());
 			
+			HistoricalItem historical = new HistoricalItem();
+			historical.setIdItem(tmp.getId());
+			historical.setNewPrice(item.getPrice());
+			historical.setOldPrice(tmp.getPrice());
+			historical.setWeighPrice(weighPrice);
+			historical.setQty(item.getQty());
+			historical.setStockQty(tmp.getQty());
+			historical.setTotalQty(totalQty);
+			
+			historicalItemRepository.save(historical);
+			
+			
 		}
 		itemRepository.save(item);
 		return item;
@@ -50,6 +66,11 @@ public class ItemServiceImp implements ItemService {
 	@Override
 	public Item save(Item item) {
 		return itemRepository.save(item);
+	}
+
+	@Override
+	public Item findById(Long id) {
+		return itemRepository.findById(id).get();
 	}
 
 }

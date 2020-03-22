@@ -10,4 +10,6 @@ public interface ItemService {
 	Collection<Item> findAll();
 	
 	Item save(Item item);
+	
+	Item findById(Long id);
 }
