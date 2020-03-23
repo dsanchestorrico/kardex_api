@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "b15440ac-ee8e-4d5c-abea-df0abc87cfde",
+		"name": "Kardex-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List all Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/item/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"item",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\": \"item 7\",\r\n        \"description\": \"descripcion item 7\",\r\n        \"status\": \"active\",\r\n        \"price\": 150.00,\r\n        \"qty\": 11.00,\r\n        \"lastPrice\": 0.00,\r\n        \"lastDate\": \"2020-03-22T04:00:00.000+0000\"\r\n\t\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/item/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"item",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weigh Item",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 1,\r\n        \"name\": \"item 1\",\r\n        \"description\": \"descripcion item 1\",\r\n        \"status\": \"active\",\r\n        \"price\": 120.00,\r\n        \"qty\": 15.00,\r\n        \"lastPrice\": 0.00,\r\n        \"lastDate\": \"2020-03-22T04:00:00.000+0000\"\r\n\t\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/item/weigh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"item",
+						"weigh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Item By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/item/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"item",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Historical By Id Item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/item/historical/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"item",
+						"historical",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
